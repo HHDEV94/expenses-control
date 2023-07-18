@@ -209,8 +209,8 @@ header h1 {
     text-align: left;
   }
 }
-.budget-content p.negativo,
-.budget-content p.negativo span {
+.budget-content p.negative,
+.budget-content p.negative span {
   color: red;
 }
 .budget-content span {
@@ -239,17 +239,17 @@ main {
   padding-top: 10rem;
 }
 
-.filtros .form-field {
+.filter .form-field {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
-.filtros label {
+.filter label {
   font-size: 3rem;
   font-weight: 900;
   color: var(--dark-gray);
 }
-.filtros select {
+.filter select {
   flex: 1;
   padding: 1rem;
   border: none;

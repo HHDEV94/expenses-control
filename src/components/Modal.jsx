@@ -2,19 +2,22 @@
 import { useEffect, useState } from 'react'
 import CloseModalIcon from '../img/close.svg'
 import Alert from './Alert'
-import { idGenerator } from '../utilities/utilities'
 
 const Modal = ({ editExpense, animateModal, setModal, setAnimateModal, handleSaveExpense }) => {
   const [message, setMessage] = useState('')
   const [name, setName] = useState('')
   const [amount, setAmount] = useState('')
   const [category, setCategory] = useState('')
+  const [id, setId] = useState('')
+  const [date, setDate] = useState(Date.now())
 
   useEffect(() => {
     if (Object.keys(editExpense).length > 0) {
       setName(editExpense.name)
       setAmount(editExpense.amount)
       setCategory(editExpense.category)
+      setId(editExpense.id)
+      setDate(editExpense.date)
     }
   }, [editExpense])
 
@@ -38,7 +41,7 @@ const Modal = ({ editExpense, animateModal, setModal, setAnimateModal, handleSav
       return
     }
 
-    handleSaveExpense({ name, amount, category, id: idGenerator(), date: Date.now() })
+    handleSaveExpense({ name, amount, category, id, date })
     handleCloseModal()
   }
 
@@ -49,7 +52,7 @@ const Modal = ({ editExpense, animateModal, setModal, setAnimateModal, handleSav
       </div>
 
       <form className={`form ${animateModal ? 'animate' : 'close'}`} onSubmit={handleSubmit}>
-        <legend>New Expense</legend>
+        <legend>{editExpense.name ? 'Editing Expense' : 'New Expense'}</legend>
 
         {message && <Alert type={'error'}>{message}</Alert>}
 
@@ -89,7 +92,7 @@ const Modal = ({ editExpense, animateModal, setModal, setAnimateModal, handleSav
           </select>
         </div>
 
-        <input type='submit' value='Add Expense' />
+        <input type='submit' value={editExpense.name ? 'Edit Expense' : 'Add Expense'} />
       </form>
     </div>
   )
